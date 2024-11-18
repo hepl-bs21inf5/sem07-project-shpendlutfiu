@@ -1,90 +1,91 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import QuestionRadio from '@/components/QuestionRadio.vue'
 
 const cheval = ref<string | null>(null)
 const chat = ref<string | null>(null)
-const filled = computed<boolean>(() => cheval.value !== null && chat.value !== null)
+const carre = ref<string | null>(null)
+const filled = computed<boolean>(
+  () => cheval.value !== null && chat.value !== null && carre.value !== null,
+)
 
 function submit(event: Event): void {
   event.preventDefault()
+  let score = 0
+  let scoremax = 0
   if (filled.value) {
-    alert(`Vous avez choisi la couleur ${cheval.value} pour le cheval et la couleur ${chat.value} pour le chat !`)
+    if (cheval.value == 'blanc') {
+      score += 1
+    }
+    scoremax += 1
+
+    if (chat.value == 'jaune') {
+      score += 1
+    }
+    scoremax += 1
+
+    if (carre.value == '4') {
+      score += 1
+    }
+    scoremax += 1
+    if (score == scoremax) {
+      alert(`vous avez fait un sans faute !!!`)
+    } else {
+      alert(
+        `Vous avez choisi la couleur ${cheval.value} pour le cheval, la couleur ${chat.value} pour le chat, et ${carre.value} nombre de côté(s) pour le carré! Vous avez ${score} bonne(s) réponse(s)!`,
+      )
+    }
   }
+}
+function reset(event: Event): void {
+  event.preventDefault()
+  cheval.value = null
+  chat.value = null
+  carre.value = null
 }
 </script>
 
 <template>
   <form @submit="submit">
-    De quelle couleur est le cheval blanc de Napoléon ?
-    <div class="form-check">
-      <input
-        id="chevalBlanc"
-        v-model="cheval"
-        class="form-check-input"
-        type="radio"
-        name="cheval"
-        value="blanc"
-      />
-      <label class="form-check-label" for="chevalBlanc">Blanc</label>
-    </div>
-    <div class="form-check">
-      <input
-        id="chevalBrun"
-        v-model="cheval"
-        class="form-check-input"
-        type="radio"
-        name="cheval"
-        value="brun"
-      />
-      <label class="form-check-label" for="chevalBrun">Brun</label>
-    </div>
-    <div class="form-check">
-      <input
-        id="chevalNoir"
-        v-model="cheval"
-        class="form-check-input"
-        type="radio"
-        name="cheval"
-        value="noir"
-      />
-      <label class="form-check-label" for="chevalNoir">Noir</label>
-    </div>
+    <QuestionRadio
+      id="cheval"
+      v-model="cheval"
+      text="De quelle couleur est le cheval blanc de Napoléon ?"
+      :options="[
+        { value: 'blanc', text: 'Blanc' },
+        { value: 'brun', text: 'Brun' },
+        { value: 'noir', text: 'Noir' },
+        { value: 'gris', text: 'Gris' },
+      ]"
+    />
   </form>
   <form @submit="submit">
-    De quelle couleur est le chat?
-    <div class="form-check">
-      <input
-        id="chatrouge"
-        v-model="chat"
-        class="form-check-input"
-        type="radio"
-        name="chat"
-        value="Rouge"
-      />
-      <label class="form-check-label" for="chevalBlanc">Rouge</label>
-    </div>
-    <div class="form-check">
-      <input
-        id="chatjaune"
-        v-model="chat"
-        class="form-check-input"
-        type="radio"
-        name="chat"
-        value="Jaune"
-      />
-      <label class="form-check-label" for="chatjaune">Jaune</label>
-    </div>
-    <div class="form-check">
-      <input
-        id="chatvert"
-        v-model="chat"
-        class="form-check-input"
-        type="radio"
-        name="chat"
-        value="vert"
-      />
-      <label class="form-check-label" for="chatvert">Vert</label>
-    </div>
+    <QuestionRadio
+      id="chat"
+      v-model="chat"
+      text="De quelle couleur est le chat?"
+      :options="[
+        { value: 'rouge', text: 'Rouge' },
+        { value: 'jaune', text: 'Jaune' },
+        { value: 'vert', text: 'vert' },
+        { value: 'noir', text: 'Noir' },
+      ]"
+    />
+  </form>
+  <form @submit="submit">
+    <QuestionRadio
+      id="carre"
+      v-model="carre"
+      text="Combien de côtés a un carré?"
+      :options="[
+        { value: '1', text: '1' },
+        { value: '2', text: '2' },
+        { value: '3', text: '3' },
+        { value: '4', text: '4' },
+      ]"
+    />
     <button class="btn btn-primary" :class="{ disabled: !filled }" type="submit">Terminer</button>
+
+    <button class="btn btn-secondary" @click="reset">Réinitialiser</button>
   </form>
 </template>
