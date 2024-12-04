@@ -1,10 +1,6 @@
-# projet
+# projet Shpend Lutfiu
 
-Shpend Lutfiu
-
-journal de bord :
-
-# projet
+# journal de bord :
 ## semaine 1
 ### Temps passé
 
@@ -47,24 +43,45 @@ Qu'est-ce qu'un v-model ?
 ## semaine 2
 ### Temps passé
 
-| Tâche | Temps passé | Commentaire |
-| ----- | ----------- | ----------- |
-|       |             |             |
-|       |             |             |
-|       |             |             |
-| Total |             |             |
-### question et remarque 
+| Tâche, Temps passé,  Commentaire :
+-questionradio, 1h, pas de commentaire 
+
+-questiontext, 45min, difficulté à trouver quoi changer pour que ça marche 
+
+-API, 1h, difficulté à trouver dans quel fichier il fallait faire les changements
+
+total: 2h45min
+
+### questions 
+Quelle est la différence entre un prop et un modèle (v-model) ?
+
+-le v-model sychronise l'information dans les deux côtés alors que prop fait uniquement dans un seul sens.
+
+Comment rendre la propriété placeholder optionnelle ?
+
+- on fait un placeholder par défaut quand il n'y en a pas dans notre modele.
+
+
 
 ## semaine 3
 ### Temps passé
 
-| Tâche | Temps passé | Commentaire |
-| ----- | ----------- | ----------- |
-|       |             |             |
-|       |             |             |
-|       |             |             |
-| Total |             |             |
-### question et remarque 
+Tâche, Temps passé, Commentaire :
+
+réponse, 30min, pas de difficulté 
+score, 20min, pas de difficulté
+total: 50min
+
+#### questions 
+
+À quoi sert l'option immediate: true dans le watch ? Que se passe-t-il si on l'enlève ou si on met immediate: false ?
+
+- pour qu'on aille une valeur de départ avan que l'ordinateur execute le code. si on ne met pas cela, l'ordinateur ne va pas mettre de valeur tant que nous n'avons pas fait de changement dans la réponse mise sur la question sur le site.
+
+Proposer une autre manière de calculer le score (réécrire la fonction du computed) et comparer les deux méthodes.
+
+- faire deux nouvelles variables score et scoretotale, les incrémentés pour chaque question, pour le score uniquement lorsque la réponse mise est juste et l'autre à chaque question. nous n'allons pas avoir le score en temps réel mais uniquement lorsque nous aurons appuyer sur le bontons.
+
 
 ## semaine 4
 ### Temps passé

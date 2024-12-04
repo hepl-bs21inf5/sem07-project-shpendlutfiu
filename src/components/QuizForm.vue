@@ -1,12 +1,24 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import QuestionRadio from '@/components/QuestionRadio.vue'
+import QuestionText from './QuestionText.vue'
+import QuestionCheckbox from './QuestionCheckbox.vue'
 
+const correctAnswers = ref<boolean[]>([])
 const cheval = ref<string | null>(null)
+const reponse = ref<string | null>(null)
 const chat = ref<string | null>(null)
 const carre = ref<string | null>(null)
+const branches = ref<string | null>(null)
+const score = computed<number>(() => correctAnswers.value.filter((value) => value).length)
+const totalScore = 5
 const filled = computed<boolean>(
-  () => cheval.value !== null && chat.value !== null && carre.value !== null,
+  () =>
+    cheval.value !== null &&
+    chat.value !== null &&
+    carre.value !== null &&
+    reponse.value !== '' &&
+    branches.value !== '',
 )
 
 function submit(event: Event): void {
@@ -28,6 +40,14 @@ function submit(event: Event): void {
       score += 1
     }
     scoremax += 1
+    if (reponse.value == '4') {
+      score += 1
+    }
+    scoremax += 1
+    if (branches.value == '4') {
+      score += 1
+    }
+    scoremax += 1
     if (score == scoremax) {
       alert(`vous avez fait un sans faute !!!`)
     } else {
@@ -39,17 +59,15 @@ function submit(event: Event): void {
 }
 function reset(event: Event): void {
   event.preventDefault()
-  cheval.value = null
-  chat.value = null
-  carre.value = null
 }
 </script>
 
 <template>
   <form @submit="submit">
     <QuestionRadio
+      v-model="correctAnswers[0]"
+      answer="blanc"
       id="cheval"
-      v-model="cheval"
       text="De quelle couleur est le cheval blanc de Napoléon ?"
       :options="[
         { value: 'blanc', text: 'Blanc' },
@@ -58,11 +76,11 @@ function reset(event: Event): void {
         { value: 'gris', text: 'Gris' },
       ]"
     />
-  </form>
-  <form @submit="submit">
+
     <QuestionRadio
+      v-model="correctAnswers[1]"
+      answer="jaune"
       id="chat"
-      v-model="chat"
       text="De quelle couleur est le chat?"
       :options="[
         { value: 'rouge', text: 'Rouge' },
@@ -71,11 +89,11 @@ function reset(event: Event): void {
         { value: 'noir', text: 'Noir' },
       ]"
     />
-  </form>
-  <form @submit="submit">
+
     <QuestionRadio
+      v-model="correctAnswers[2]"
+      answer="4"
       id="carre"
-      v-model="carre"
       text="Combien de côtés a un carré?"
       :options="[
         { value: '1', text: '1' },
@@ -84,7 +102,26 @@ function reset(event: Event): void {
         { value: '4', text: '4' },
       ]"
     />
+    <QuestionText
+      id="patte"
+      v-model="correctAnswers[3]"
+      answer="4"
+      text="Combien de pattes a un chat ?"
+    />
+
+    <QuestionText
+      id="branche"
+      v-model="correctAnswers[4]"
+      answer="4"
+      text="Combien il y a de branches au bs1 ?"
+      placeholder="veuillez noter un nombre"
+    />
+    <p></p>
+    <div>Réponses correctes : {{ correctAnswers }}</div>
+    <div>Score : {{ score }} / {{ totalScore }}</div>
+    <p></p>
     <button class="btn btn-primary" :class="{ disabled: !filled }" type="submit">Terminer</button>
+    <p></p>
 
     <button class="btn btn-secondary" @click="reset">Réinitialiser</button>
   </form>
