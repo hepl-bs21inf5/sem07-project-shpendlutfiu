@@ -3,69 +3,37 @@ import { computed, ref } from 'vue'
 import QuestionRadio from '@/components/QuestionRadio.vue'
 import QuestionText from './QuestionText.vue'
 import QuestionCheckbox from './QuestionCheckbox.vue'
+import { QuestionState } from '@/utils/models'
 
-const correctAnswers = ref<boolean[]>([])
-const cheval = ref<string | null>(null)
-const reponse = ref<string | null>(null)
-const chat = ref<string | null>(null)
-const carre = ref<string | null>(null)
-const branches = ref<string | null>(null)
-const score = computed<number>(() => correctAnswers.value.filter((value) => value).length)
-const totalScore = 5
-const filled = computed<boolean>(
-  () =>
-    cheval.value !== null &&
-    chat.value !== null &&
-    carre.value !== null &&
-    reponse.value !== '' &&
-    branches.value !== '',
+const questionStates = ref<QuestionState[]>([])
+const submitted = computed<boolean>(() =>
+  questionStates.value.every(
+    (state) => state === QuestionState.Correct || state === QuestionState.Wrong,
+  ),
 )
 
+const score = computed<number>(
+  () => questionStates.value.filter((state) => state === QuestionState.Correct).length,
+)
+const totalScore = computed<number>(() => questionStates.value.length)
+
+const filled = computed<boolean>(() =>
+  questionStates.value.every((state) => state === QuestionState.Fill),
+)
 function submit(event: Event): void {
   event.preventDefault()
-  let score = 0
-  let scoremax = 0
-  if (filled.value) {
-    if (cheval.value == 'blanc') {
-      score += 1
-    }
-    scoremax += 1
-
-    if (chat.value == 'jaune') {
-      score += 1
-    }
-    scoremax += 1
-
-    if (carre.value == '4') {
-      score += 1
-    }
-    scoremax += 1
-    if (reponse.value == '4') {
-      score += 1
-    }
-    scoremax += 1
-    if (branches.value == '4') {
-      score += 1
-    }
-    scoremax += 1
-    if (score == scoremax) {
-      alert(`vous avez fait un sans faute !!!`)
-    } else {
-      alert(
-        `Vous avez choisi la couleur ${cheval.value} pour le cheval, la couleur ${chat.value} pour le chat, et ${carre.value} nombre de côté(s) pour le carré! Vous avez ${score} bonne(s) réponse(s)!`,
-      )
-    }
-  }
+  questionStates.value = questionStates.value.map(() => QuestionState.Submit)
 }
 function reset(event: Event): void {
   event.preventDefault()
+  questionStates.value = questionStates.value.map(() => QuestionState.Empty)
 }
 </script>
 
 <template>
   <form @submit="submit">
     <QuestionRadio
-      v-model="correctAnswers[0]"
+      v-model="questionStates[0]"
       answer="blanc"
       id="cheval"
       text="De quelle couleur est le cheval blanc de Napoléon ?"
@@ -78,7 +46,7 @@ function reset(event: Event): void {
     />
 
     <QuestionRadio
-      v-model="correctAnswers[1]"
+      v-model="questionStates[1]"
       answer="jaune"
       id="chat"
       text="De quelle couleur est le chat?"
@@ -91,7 +59,7 @@ function reset(event: Event): void {
     />
 
     <QuestionRadio
-      v-model="correctAnswers[2]"
+      v-model="questionStates[2]"
       answer="4"
       id="carre"
       text="Combien de côtés a un carré?"
@@ -104,21 +72,24 @@ function reset(event: Event): void {
     />
     <QuestionText
       id="patte"
-      v-model="correctAnswers[3]"
+      v-model="questionStates[3]"
       answer="4"
       text="Combien de pattes a un chat ?"
     />
 
     <QuestionText
       id="branche"
-      v-model="correctAnswers[4]"
+      v-model="questionStates[4]"
       answer="4"
       text="Combien il y a de branches au bs1 ?"
       placeholder="veuillez noter un nombre"
     />
     <p></p>
-    <div>Réponses correctes : {{ correctAnswers }}</div>
-    <div>Score : {{ score }} / {{ totalScore }}</div>
+    <div>Réponses correctes : {{ questionStates }}</div>
+    <p></p>
+    <div>Debug états : {{ questionStates }}</div>
+    <p></p>
+    <div v-if="submitted">Score : {{ score }} / {{ totalScore }}</div>
     <p></p>
     <button class="btn btn-primary" :class="{ disabled: !filled }" type="submit">Terminer</button>
     <p></p>
