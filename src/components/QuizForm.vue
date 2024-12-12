@@ -35,6 +35,7 @@ function reset(event: Event): void {
     <QuestionRadio
       v-model="questionStates[0]"
       answer="blanc"
+      answer-detail="La réponse est dans la question..."
       id="cheval"
       text="De quelle couleur est le cheval blanc de Napoléon ?"
       :options="[
@@ -48,6 +49,7 @@ function reset(event: Event): void {
     <QuestionRadio
       v-model="questionStates[1]"
       answer="jaune"
+      answer-detail="Le chat est dyslexique."
       id="chat"
       text="De quelle couleur est le chat?"
       :options="[
@@ -61,6 +63,7 @@ function reset(event: Event): void {
     <QuestionRadio
       v-model="questionStates[2]"
       answer="4"
+      answer-detail="Deux paires de côtés isométrique."
       id="carre"
       text="Combien de côtés a un carré?"
       :options="[
@@ -75,6 +78,7 @@ function reset(event: Event): void {
       v-model="questionStates[3]"
       answer="4"
       text="Combien de pattes a un chat ?"
+      answer-detail="Le chat est un mammifère quadrupède."
     />
 
     <QuestionText
@@ -83,14 +87,13 @@ function reset(event: Event): void {
       answer="4"
       text="Combien il y a de branches au bs1 ?"
       placeholder="veuillez noter un nombre"
+      answer-detail="Il y a 4 branches dans chaque profil."
     />
     <p></p>
     <div>Réponses correctes : {{ questionStates }}</div>
     <p></p>
-    <div>Debug états : {{ questionStates }}</div>
-    <p></p>
     <div v-if="submitted">Score : {{ score }} / {{ totalScore }}</div>
-    <p></p>
+    <br />
     <button class="btn btn-primary" :class="{ disabled: !filled }" type="submit">Terminer</button>
     <p></p>
 

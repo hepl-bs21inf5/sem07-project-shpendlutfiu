@@ -125,15 +125,31 @@ celui-ci est pour le QuestionRadio.vue. Pour QuestionText.vue, il faut remplacer
 
 ### Temps passé
 
-| Tâche | Temps passé | Commentaire |
-| ----- | ----------- | ----------- |
-|       |             |             |
-|       |             |             |
-|       |             |             |
-| Total |             |             |
+| Tâche, Temps passé, Commentaire :
 
-### question et remarque
+- réponse détaillée, 1h05min, problème avec mes fichiers et je n'arrivais pas à avancer dans le projet sinon j'aurais terminé en 5 minutes.
 
+- style, 3 minutes, pas de difficulté et plus de facilité pour changer le style et savoir quel texte on change de style.
+
+### question
+
+Ajouter ce computed dans QuestionRadio.vue :
+
+const answerText = computed<string>(
+  () =>
+    props.options.find((option) => option.value === props.answer)?.text ??
+    props.answer,
+);
+
+Remplacer {{ props.answer }} par {{ answerText }} dans le template.
+
+Expliquer pourquoi on a fait ce changement ainsi que le code du computed.
+
+- En mettant une nouvelle variable, nous avons, tout d'abord, une meilleur lisibilité dans notre code et nous n'utilisons pas la variable directement, comme cela il n'y a pas de problème pour la variable props.answer, elle ne sera pas changer si on change la copie "answerText".
+
+Que se passe-t-il lorsqu'on ne met pas de valeur à answer-detail ? Est-ce satisfaisant ? Si ce n'est pas le cas, proposer une amélioration.
+
+- cela met un trait avec rien derrière car la chaine de caractère est vide dans nos questiontext et questionradio. ce n'est pas satisfaisant, on pourrait mettre une chaîne de caractère par défaut quand on met rien.
 ## semaine 6
 
 ### Temps passé
