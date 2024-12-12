@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineModel, defineProps, ref, watch, type PropType } from 'vue'
+import { defineModel, defineProps, ref, watch } from 'vue'
 import { QuestionState } from '@/utils/models'
 
 const model = defineModel<QuestionState>()
@@ -49,18 +49,14 @@ watch(
       "
     />
   </div>
-  <div
-    v-if="model === QuestionState.Correct || model === QuestionState.Wrong"
-  >
+  <div v-if="model === QuestionState.Correct || model === QuestionState.Wrong">
     <p v-if="model === QuestionState.Correct" class="text-success">Juste !</p>
-    <p v-else class="text-danger">
-      Faux ! La réponse était : {{ props.answer }}
-    </p>
+    <p v-else class="text-danger">Faux ! La réponse était : {{ props.answer }}</p>
     <p class="blockquote-footer">{{ props.answerDetail }}</p>
   </div>
 </template>
 <style scoped>
-  .text-danger {
-    color: purple !important;
-  }
+.text-danger {
+  color: purple !important;
+}
 </style>
