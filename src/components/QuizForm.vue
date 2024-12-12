@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import QuestionRadio from '@/components/QuestionRadio.vue'
 import QuestionText from './QuestionText.vue'
-import QuestionCheckbox from './QuestionCheckbox.vue'
+//import QuestionCheckbox from './QuestionCheckbox.vue'//
 import { QuestionState } from '@/utils/models'
 
 const questionStates = ref<QuestionState[]>([])
@@ -33,10 +33,11 @@ function reset(event: Event): void {
 <template>
   <form @submit="submit">
     <QuestionRadio
+      id="cheval"
       v-model="questionStates[0]"
       answer="blanc"
       answer-detail="La réponse est dans la question..."
-      id="cheval"
+
       text="De quelle couleur est le cheval blanc de Napoléon ?"
       :options="[
         { value: 'blanc', text: 'Blanc' },
@@ -47,10 +48,10 @@ function reset(event: Event): void {
     />
 
     <QuestionRadio
+      id="chat"
       v-model="questionStates[1]"
       answer="jaune"
       answer-detail="Le chat est dyslexique."
-      id="chat"
       text="De quelle couleur est le chat?"
       :options="[
         { value: 'rouge', text: 'Rouge' },
@@ -61,10 +62,11 @@ function reset(event: Event): void {
     />
 
     <QuestionRadio
+      id="carre"
       v-model="questionStates[2]"
       answer="4"
       answer-detail="Deux paires de côtés isométrique."
-      id="carre"
+
       text="Combien de côtés a un carré?"
       :options="[
         { value: '1', text: '1' },
