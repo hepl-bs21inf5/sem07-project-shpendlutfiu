@@ -1,5 +1,6 @@
 # projet Shpend Lutfiu
 
+lien du site : https://hepl-bs21inf5.github.io/sem07-project-shpendlutfiu/
 # journal de bord :
 
 ## semaine 1
