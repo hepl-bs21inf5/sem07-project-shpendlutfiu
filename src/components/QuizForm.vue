@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import QuestionRadio from '@/components/QuestionRadio.vue'
 import QuestionText from './QuestionText.vue'
 import QuestionCheckbox from './QuestionCheckbox.vue'
+import QuestionSelect from './QuestionSelect.vue'
 import { QuestionState } from '@/utils/models'
 
 const questionStates = ref<QuestionState[]>([])
@@ -31,7 +32,7 @@ function reset(event: Event): void {
 
 <template>
   <form @submit="submit">
-    <QuestionRadio
+    <QuestionSelect
       id="cheval"
       v-model="questionStates[0]"
       answer="blanc"
@@ -100,10 +101,20 @@ function reset(event: Event): void {
       placeholder="veuillez noter un nombre"
       answer-detail="Il y a 4 branches dans chaque profil."
     />
+    <QuestionText
+      id="nbrquestion4"
+      v-model="questionStates[6]"
+      answer="4"
+      text="Combien il y a de question dont la réponse est 4 dans le quiz (y compris cette question) ?"
+      placeholder="veuillez noter un nombre"
+      answer-detail="Il y a 4 questions où 4 est la réponse."
+    />
     <p></p>
     <div>Réponses correctes : {{ questionStates }}</div>
     <p></p>
     <div v-if="submitted">Score : {{ score }} / {{ totalScore }}</div>
+    <br />
+    <div v-if="submitted && score === totalScore">Vous avez fait un sans faute, bravo !</div>
     <br />
     <button class="btn btn-primary" :class="{ disabled: !filled }" type="submit">Terminer</button>
     <p></p>

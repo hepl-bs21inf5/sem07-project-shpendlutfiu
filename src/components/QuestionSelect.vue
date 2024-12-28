@@ -20,16 +20,14 @@ function shuffleArray<T>(array: T[]): T[] {
   return array.sort(() => Math.random() - 0.5)
 }
 
-const shuffledOptions = ref<{ value: string, text: string }[]>([])
+const shuffledOptions = ref<{ value: string; text: string }[]>([])
 
 onMounted(() => {
   shuffledOptions.value = shuffleArray([...props.options])
 })
 
 const answerText = computed<string>(
-  () =>
-    props.options.find((option) => option.value === props.answer)?.text ??
-    props.answer,
+  () => props.options.find((option) => option.value === props.answer)?.text ?? props.answer,
 )
 
 watch(model, (newModel) => {
@@ -55,24 +53,22 @@ watch(
 
 <template>
   <div>{{ props.text }}</div>
-  <div v-for="option in shuffledOptions" :key="option.value" class="form-check">
-    <input
-      :id="`${props.id}-${option.value}`"
-      v-model="value"
-      class="form-check-input"
-      type="radio"
-      :name="props.id"
-      :value="option.value"
-      :disabled="
-        model === QuestionState.Submit ||
-        model === QuestionState.Correct ||
-        model === QuestionState.Wrong
-      "
-    />
-    <label class="form-check-label" :for="`${props.id}-${option.value}`">
+
+  <select
+    v-model="value"
+    :disabled="
+      model === QuestionState.Submit ||
+      model === QuestionState.Correct ||
+      model === QuestionState.Wrong
+    "
+  >
+    <option value="" disabled selected>Choisissez une réponse</option>
+
+    <option v-for="option in shuffledOptions" :key="option.value" :value="option.value">
       {{ option.text }}
-    </label>
-  </div>
+    </option>
+  </select>
+
   <div v-if="model === QuestionState.Correct || model === QuestionState.Wrong">
     <p v-if="model === QuestionState.Correct" class="text-success">Juste !</p>
     <p v-else class="text-danger">Faux ! La réponse était : {{ answerText }}</p>
@@ -85,6 +81,6 @@ watch(
   color: rgb(255, 52, 52) !important;
 }
 .text-success {
-color: rgb(21, 255, 0) !important;
+  color: rgb(21, 255, 0) !important;
 }
 </style>

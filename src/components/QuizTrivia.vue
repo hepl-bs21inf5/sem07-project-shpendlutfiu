@@ -63,6 +63,8 @@ function reset(event: Event): void {
     <br />
     <div v-if="submitted">Score : {{ score }} / {{ totalScore }}</div>
     <br />
+    <div v-if="submitted && score === totalScore">Vous avez fait un sans faute, bravo !</div>
+    <br />
     <button class="btn btn-primary" :class="{ disabled: !filled }" type="submit">Terminer</button>
     <p></p>
     <button class="btn btn-secondary" @click="reset">Réinitialiser</button>

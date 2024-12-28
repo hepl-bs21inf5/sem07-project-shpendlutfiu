@@ -2,11 +2,17 @@
   <div class="container mt-3">
     <h1>À propos</h1>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-      voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-      non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <br />
+      Dans le cadre de notre formation à la HEP, nous avons créé un site web qui permet de répondre
+      à un quiz, avec plusieurs manières différentes de répondre.
+      <br />
+      <br />
+      Le quiz avec mes propres questions se trouve dans la section Quiz. Il y a également une
+      section Trivia, qui propose des questions issues d'un autre site internet, vous offrant ainsi
+      la possibilité de répondre à des questions supplémentaires.
+      <br />
+      <br />
+      Bonne chance pour votre quiz et amusez-vous bien !
     </p>
   </div>
 </template>

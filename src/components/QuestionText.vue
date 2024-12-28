@@ -57,6 +57,9 @@ watch(
 </template>
 <style scoped>
 .text-danger {
-  color: purple !important;
+  color: rgb(255, 52, 52) !important;
+}
+.text-success {
+  color: rgb(21, 255, 0) !important;
 }
 </style>
