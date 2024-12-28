@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import QuestionRadio from '@/components/QuestionRadio.vue'
 import QuestionText from './QuestionText.vue'
-//import QuestionCheckbox from './QuestionCheckbox.vue'//
+import QuestionCheckbox from './QuestionCheckbox.vue'
 import { QuestionState } from '@/utils/models'
 
 const questionStates = ref<QuestionState[]>([])
@@ -11,7 +11,6 @@ const submitted = computed<boolean>(() =>
     (state) => state === QuestionState.Correct || state === QuestionState.Wrong,
   ),
 )
-
 const score = computed<number>(
   () => questionStates.value.filter((state) => state === QuestionState.Correct).length,
 )
@@ -37,7 +36,6 @@ function reset(event: Event): void {
       v-model="questionStates[0]"
       answer="blanc"
       answer-detail="La réponse est dans la question..."
-
       text="De quelle couleur est le cheval blanc de Napoléon ?"
       :options="[
         { value: 'blanc', text: 'Blanc' },
@@ -46,10 +44,22 @@ function reset(event: Event): void {
         { value: 'gris', text: 'Gris' },
       ]"
     />
+    <QuestionCheckbox
+      id="q1"
+      v-model="questionStates[1]"
+      text="Quelles sont les couleurs primaires ?"
+      :answer="['red', 'blue', 'yellow']"
+      :options="[
+        { value: 'red', text: 'Rouge' },
+        { value: 'blue', text: 'Bleu' },
+        { value: 'yellow', text: 'Jaune' },
+        { value: 'green', text: 'Vert' },
+      ]"
+    />
 
     <QuestionRadio
       id="chat"
-      v-model="questionStates[1]"
+      v-model="questionStates[2]"
       answer="jaune"
       answer-detail="Le chat est dyslexique."
       text="De quelle couleur est le chat?"
@@ -63,10 +73,9 @@ function reset(event: Event): void {
 
     <QuestionRadio
       id="carre"
-      v-model="questionStates[2]"
+      v-model="questionStates[3]"
       answer="4"
       answer-detail="Deux paires de côtés isométrique."
-
       text="Combien de côtés a un carré?"
       :options="[
         { value: '1', text: '1' },
@@ -77,7 +86,7 @@ function reset(event: Event): void {
     />
     <QuestionText
       id="patte"
-      v-model="questionStates[3]"
+      v-model="questionStates[4]"
       answer="4"
       text="Combien de pattes a un chat ?"
       answer-detail="Le chat est un mammifère quadrupède."
@@ -85,7 +94,7 @@ function reset(event: Event): void {
 
     <QuestionText
       id="branche"
-      v-model="questionStates[4]"
+      v-model="questionStates[5]"
       answer="4"
       text="Combien il y a de branches au bs1 ?"
       placeholder="veuillez noter un nombre"

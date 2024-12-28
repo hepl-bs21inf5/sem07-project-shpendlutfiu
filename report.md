@@ -153,12 +153,8 @@ Que se passe-t-il lorsqu'on ne met pas de valeur à answer-detail ? Est-ce satis
 ## semaine 6
 
 ### Temps passé
+| Tâche, Temps passé, Commentaire :
 
-| Tâche | Temps passé | Commentaire |
-| ----- | ----------- | ----------- |
-|       |             |             |
-|       |             |             |
-|       |             |             |
-| Total |             |             |
+- Trivia, 3h environ, difficulté rencontré sur la bonne réponse. Même si l'utilisateur donnait la bonne réponse, c'était quand même écrit faux.
 
 ### question et remarque
