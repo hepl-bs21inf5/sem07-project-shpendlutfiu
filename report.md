@@ -155,6 +155,6 @@ Que se passe-t-il lorsqu'on ne met pas de valeur à answer-detail ? Est-ce satis
 ### Temps passé
 | Tâche, Temps passé, Commentaire :
 
-- Trivia, 3h environ, difficulté rencontré sur la bonne réponse. Même si l'utilisateur donnait la bonne réponse, c'était quand même écrit faux.
+- Trivia, 3h environ, difficulté rencontré sur la bonne réponse. Même si l'utilisateur donnait la bonne réponse, c'était quand même écrit faux.(version 2)
 
 ### question et remarque
